@@ -1,8 +1,7 @@
 <mat-card *ngIf="product" class="mat-elevation-z4" style="margin: 2rem; padding: 1rem;">
-  <div style="display: flex; flex-direction: column; gap: 2rem;" class="layout-container">
-    <div style="display: flex; flex-direction: row; gap: 2rem; flex-wrap: wrap;">
-
-      <!-- Imagen del producto -->
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      <!-- Imagen -->
       <div style="flex: 1 1 300px; display: flex; justify-content: center;">
         <img
           [src]="product.images[0]"
@@ -11,7 +10,7 @@
         />
       </div>
 
-      <!-- Detalles del producto -->
+      <!-- Detalles -->
       <div style="flex: 2 1 400px;">
         <h1 style="font-size: 2rem; font-weight: bold; color: #1f2937;">{{ product.name }}</h1>
         <p style="font-size: 0.9rem; color: #6b7280;">{{ product.shortDescription }}</p>
@@ -39,6 +38,50 @@
           <button mat-raised-button color="primary">Agregar al carrito</button>
         </div>
       </div>
+    </div>
+
+    <!-- Comentarios y calificaciones -->
+    <mat-divider style="margin-top: 2rem;"></mat-divider>
+    <h3 style="margin-top: 1rem;">Comentarios</h3>
+
+    <!-- Formulario solo si está autenticado -->
+    <form *ngIf="isLoggedIn" (ngSubmit)="submitComment()" style="margin-bottom: 2rem;">
+      <mat-form-field class="w-full">
+        <mat-label>Tu comentario</mat-label>
+        <textarea matInput [(ngModel)]="message" name="message" required></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Calificación</mat-label>
+        <mat-select [(ngModel)]="rating" name="rating" required>
+          <mat-option *ngFor="let star of [1,2,3,4,5]" [value]="star">
+            {{ star }} estrella{{ star > 1 ? 's' : '' }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <button mat-raised-button color="accent" type="submit">Publicar comentario</button>
+      </div>
+    </form>
+
+    <!-- Comentarios -->
+    <div *ngFor="let c of comments" style="margin-bottom: 1rem;">
+      <strong>{{ c.userName }}</strong>
+      <span style="margin-left: 0.5rem; color: #888;">({{ c.createdAt | date:'short' }})</span>
+      <p style="margin: 0.2rem 0;">{{ c.message }}</p>
+      <p style="margin: 0;">Calificación:
+        <mat-icon *ngFor="let s of [1,2,3,4,5]">
+          {{ s <= c.rating ? 'star' : 'star_border' }}
+        </mat-icon>
+      </p>
+
+      <div *ngIf="currentUser === c.userName" style="margin-top: 0.5rem;">
+        <button mat-button color="warn" (click)="deleteComment(c._id)">Eliminar</button>
+        <!-- opción de editar si deseas -->
+      </div>
+
+      <mat-divider></mat-divider>
     </div>
   </div>
 </mat-card>
