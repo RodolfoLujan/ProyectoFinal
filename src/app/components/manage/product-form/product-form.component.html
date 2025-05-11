@@ -50,6 +50,10 @@
                 <input matInput type="number" formControlName="discount"/>
             </mat-form-field>
 
+            <div class="w-full flex grap-8">
+                <mat-checkbox formControlName="isFeatured">Es destacado</mat-checkbox>
+                <mat-checkbox formControlName="isNewProduct">Es nuevo</mat-checkbox>
+            </div>
             <div class="w-full flex flex-col" formArrayName="images">
                 <div class="flex justify-between "><h4>Imagenes</h4> 
                     <button mat-raised-button color="primary" (click)="addImage()">

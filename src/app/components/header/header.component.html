@@ -1,0 +1,68 @@
+<header>
+  <div class="top-bar">
+    <!-- Logo que siempre lleva al home -->
+    <div class="logo cursor-pointer" routerLink="/">
+      <div class="logo-img">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_de_la_UASLP.svg/1200px-Logo_de_la_UASLP.svg.png" />
+      </div>
+      <span>Forum UASLP</span>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        (keyup.enter)="onSearch($event)"
+      />
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+
+    <!-- Zona de perfil -->
+    <div class="profile">
+      <ng-container *ngIf="authService.isLoggedIn; else loggedOut">
+        <a
+          mat-stroked-button
+          color="accent"
+          class="profile-link cursor-pointer"
+          (click)="goToProfile()"
+        >
+          <mat-icon>account_circle</mat-icon>
+          {{ authService.userName }}
+        </a>
+        <button
+          mat-stroked-button
+          color="accent"
+          class="logout cursor-pointer"
+          (click)="logout()"
+        >
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </ng-container>
+
+      <ng-template #loggedOut>
+        <a mat-stroked-button color="accent" class="profile-link" routerLink="/login">
+          <mat-icon>account_circle</mat-icon>
+          Login
+        </a>
+        <a mat-stroked-button color="accent" class="logout" routerLink="/register">
+          <mat-icon>person_add</mat-icon>
+          Registrate
+        </a>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Menú de categorías -->
+  <nav class="category-menu" *ngIf="authService.isLoggedIn">
+    <ul class="category-list">
+      <li (click)="goHome()">
+        <a class="category-link">Inicio</a>
+      </li>
+      <li *ngFor="let category of categoryList" (click)="searchCategory(category._id!)">
+        <a class="category-link">{{ category.name }}</a>
+      </li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,21 @@
+<div class="register-container">
+  <div class="register-form enhanced-profile-card">
+    <h2>👤 Perfil de Usuario</h2>
+
+    <div class="profile-field">
+      <label>Nombre</label>
+      <div class="info-box">
+        <mat-icon class="info-icon">person</mat-icon>
+        {{ authService.userName }}
+      </div>
+    </div>
+
+    <div class="profile-field">
+      <label>Correo electrónico</label>
+      <div class="info-box">
+        <mat-icon class="info-icon">email</mat-icon>
+        {{ authService.userEmail }}
+      </div>
+    </div>
+  </div>
+</div>

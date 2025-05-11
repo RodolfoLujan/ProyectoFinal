@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="product-section">
+
+<div class="shadow-lg rounded-xl overflow-hidden bg-white p-4">
+  <owl-carousel-o [options]="customOptions">
+    @for (item of bannerImages; track $index) {
+      <ng-template carouselSlide>
+        <div 
+          class="flex flex-col items-center justify-center transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer p-4 bg-gradient-to-b from-gray-100 to-white rounded-lg shadow-md"
+          [routerLink]="'producto/' + item._id"
+          style="height: 320px;"
+        >
+          <img 
+            [src]="item.images[0]" 
+            alt="images" 
+            style="max-height: 200px; object-fit: contain;" 
+            class="mb-2 drop-shadow-lg"
+          />
+          <span class="text-center font-semibold text-lg text-gray-800 hover:text-indigo-600 transition">
+            {{ item.name }}
+          </span>
+        </div>
+      </ng-template>
+    }
+  </owl-carousel-o>
+</div>
+
+
+
+  <div class="section new-products">
+    <h2>🆕 Productos Nuevos</h2>
+    <div class="card-container">
+      <app-product-card *ngFor="let product of newProducts" [product]="product"></app-product-card>
+    </div>
+  </div>
+
+  <div class="section featured-products">
+    <h2>✨ Productos Destacados</h2>
+    <div class="card-container">
+      <app-product-card *ngFor="let product of featuredProducts" [product]="product"></app-product-card>
+    </div>
+  </div>
+</div>

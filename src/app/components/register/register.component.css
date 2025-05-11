@@ -1,0 +1,90 @@
+/* Fondo con un gradiente sutil */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #ffffff, #8aedff);
+  background-size: cover;
+}
+
+/* Formulario centrado con efectos de sombra */
+.register-form {
+  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.register-form:hover {
+  transform: translateY(-10px); /* Sutil efecto al pasar el mouse */
+}
+
+/* Título con efecto de sombra */
+.register-form h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: #4b6cb7;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para los labels */
+.register-form label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  color: #333;
+  font-size: 16px;
+}
+
+/* Inputs con bordes redondeados y efectos de enfoque */
+.register-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.register-form input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6); /* Efecto de sombra al enfoque */
+  outline: none;
+}
+
+/* Botón estilizado con gradiente */
+.register-form button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.register-form button:hover {
+  background: linear-gradient(to right, #bafff3, #ffffff);
+  transform: scale(1.05); /* Efecto de escalado */
+}
+
+.register-form button:active {
+  background: linear-gradient(to right, #4b6cb7, #1d5fad); /* Cambio de color al presionar */
+}
+/* Mensajes de error */
+.error {
+  color: #d32f2f; /* rojo suave */
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
