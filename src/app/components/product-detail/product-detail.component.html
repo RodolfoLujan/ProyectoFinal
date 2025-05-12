@@ -1,83 +1,153 @@
-<mat-card *ngIf="product" class="mat-elevation-z4" style="margin: 2rem; padding: 1rem;">
-  <div style="display: flex; flex-direction: column; gap: 2rem;">
-    <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+<mat-card
+  *ngIf="product"
+  class="mat-elevation-z4"
+  style="margin: 2rem; padding: 1rem"
+>
+  <div style="display: flex; flex-direction: column; gap: 2rem">
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem">
       <!-- Imagen -->
-      <div style="flex: 1 1 300px; display: flex; justify-content: center;">
+      <div style="flex: 1 1 300px; display: flex; justify-content: center">
         <img
           [src]="product.images[0]"
           alt="{{ product.name }}"
-          style="max-width: 100%; max-height: 400px; border-radius: 8px; object-fit: contain;"
+          style="
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            object-fit: contain;
+          "
         />
       </div>
 
       <!-- Detalles -->
-      <div style="flex: 2 1 400px;">
-        <h1 style="font-size: 2rem; font-weight: bold; color: #1f2937;">{{ product.name }}</h1>
-        <p style="font-size: 0.9rem; color: #6b7280;">{{ product.shortDescription }}</p>
+      <div style="flex: 2 1 400px">
+        <h1 style="font-size: 2rem; font-weight: bold; color: #1f2937">
+          {{ product.name }}
+        </h1>
+        <p style="font-size: 0.9rem; color: #6b7280">
+          {{ product.shortDescription }}
+        </p>
 
-        <div style="margin: 1rem 0;">
-          <span style="font-size: 1.5rem; font-weight: bold; color: #2563eb;">
+        <div style="margin: 1rem 0">
+          <span style="font-size: 1.5rem; font-weight: bold; color: #2563eb">
             ${{ getDiscountedPrice(product.price, product.discount) }}
           </span>
-          <span *ngIf="product.discount > 0" style="margin-left: 1rem; text-decoration: line-through; color: gray;">
+          <span
+            *ngIf="product.discount > 0"
+            style="
+              margin-left: 1rem;
+              text-decoration: line-through;
+              color: gray;
+            "
+          >
             ${{ product.price }}
           </span>
-          <span *ngIf="product.discount > 0" style="margin-left: 1rem; color: green; font-weight: 500;">
+          <span
+            *ngIf="product.discount > 0"
+            style="margin-left: 1rem; color: green; font-weight: 500"
+          >
             -{{ product.discount }}%
           </span>
         </div>
 
         <mat-divider></mat-divider>
 
-        <div style="margin-top: 1rem;">
-          <h3 style="font-weight: 600;">Descripción:</h3>
+        <div style="margin-top: 1rem">
+          <h3 style="font-weight: 600">Descripción:</h3>
           <p>{{ product.description }}</p>
         </div>
 
-        <div style="margin-top: 1.5rem;">
-          <button mat-raised-button color="primary">Agregar al carrito</button>
+        <mat-form-field
+          appearance="outline"
+          style="width: 120px; margin-top: 1rem"
+        >
+          <mat-label>Cantidad</mat-label>
+          <input
+            matInput
+            type="number"
+            min="1"
+            [attr.max]="product?.stock"
+            [(ngModel)]="quantity"
+          />
+        </mat-form-field>
+
+        <ng-container *ngIf="product as p">
+          <div *ngIf="p.stock === 0" style="color: red; font-weight: 500">
+            Producto sin stock disponible
+          </div>
+
+          <div *ngIf="p.stock > 0" style="margin-top: 0.5rem; color: #555">
+            Disponibles: {{ p.stock }}
+          </div>
+        </ng-container>
+
+        <div style="margin-top: 1.5rem">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addToCart()"
+            [disabled]="!product || product.stock === 0"
+          >
+            Agregar al carrito
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Comentarios y calificaciones -->
-    <mat-divider style="margin-top: 2rem;"></mat-divider>
-    <h3 style="margin-top: 1rem;">Comentarios</h3>
+    <mat-divider style="margin-top: 2rem"></mat-divider>
+    <h3 style="margin-top: 1rem">Comentarios</h3>
 
     <!-- Formulario solo si está autenticado -->
-    <form *ngIf="isLoggedIn" (ngSubmit)="submitComment()" style="margin-bottom: 2rem;">
+    <form
+      *ngIf="isLoggedIn"
+      (ngSubmit)="submitComment()"
+      style="margin-bottom: 2rem"
+    >
       <mat-form-field class="w-full">
         <mat-label>Tu comentario</mat-label>
-        <textarea matInput [(ngModel)]="message" name="message" required></textarea>
+        <textarea
+          matInput
+          [(ngModel)]="message"
+          name="message"
+          required
+        ></textarea>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Calificación</mat-label>
         <mat-select [(ngModel)]="rating" name="rating" required>
-          <mat-option *ngFor="let star of [1,2,3,4,5]" [value]="star">
-            {{ star }} estrella{{ star > 1 ? 's' : '' }}
+          <mat-option *ngFor="let star of [1, 2, 3, 4, 5]" [value]="star">
+            {{ star }} estrella{{ star > 1 ? "s" : "" }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
       <div>
-        <button mat-raised-button color="accent" type="submit">Publicar comentario</button>
+        <button mat-raised-button color="accent" type="submit">
+          Publicar comentario
+        </button>
       </div>
     </form>
 
     <!-- Comentarios -->
-    <div *ngFor="let c of comments" style="margin-bottom: 1rem;">
+    <div *ngFor="let c of comments" style="margin-bottom: 1rem">
       <strong>{{ c.userName }}</strong>
-      <span style="margin-left: 0.5rem; color: #888;">({{ c.createdAt | date:'short' }})</span>
-      <p style="margin: 0.2rem 0;">{{ c.message }}</p>
-      <p style="margin: 0;">Calificación:
-        <mat-icon *ngFor="let s of [1,2,3,4,5]">
-          {{ s <= c.rating ? 'star' : 'star_border' }}
+      <span style="margin-left: 0.5rem; color: #888"
+        >({{ c.createdAt | date : "short" }})</span
+      >
+      <p style="margin: 0.2rem 0">{{ c.message }}</p>
+      <p style="margin: 0">
+        Calificación:
+        <mat-icon *ngFor="let s of [1, 2, 3, 4, 5]">
+          {{ s <= c.rating ? "star" : "star_border" }}
         </mat-icon>
       </p>
 
-      <div *ngIf="currentUser === c.userName" style="margin-top: 0.5rem;">
-        <button mat-button color="warn" (click)="deleteComment(c._id)">Eliminar</button>
+      <div *ngIf="currentUser === c.userName" style="margin-top: 0.5rem">
+        <button mat-button color="warn" (click)="deleteComment(c._id)">
+          Eliminar
+        </button>
         <!-- opción de editar si deseas -->
       </div>
 

@@ -14,6 +14,7 @@ import { authGaurd } from './core/auth-guard';
 import { AdminDashbaordComponent } from './components/manage/admin-dashbaord/admin-dashbaord.component';
 import { adminGaurd } from './core/admin-guard';
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
     {
@@ -94,5 +95,10 @@ export const routes: Routes = [
         path:'login',
         component: LoginComponent    
     },
+    {
+  path: 'carrito',
+  component: CartComponent,
+  canActivate: [authGaurd]
+},
 ];
 

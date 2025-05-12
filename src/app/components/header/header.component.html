@@ -3,9 +3,11 @@
     <!-- Logo que siempre lleva al home -->
     <div class="logo cursor-pointer" routerLink="/">
       <div class="logo-img">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_de_la_UASLP.svg/1200px-Logo_de_la_UASLP.svg.png" />
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Logo_de_la_UASLP.svg/1200px-Logo_de_la_UASLP.svg.png"
+        />
       </div>
-      <span>Forum UASLP</span>
+      <span>UASLP</span>
     </div>
 
     <!-- Barra de búsqueda -->
@@ -20,6 +22,18 @@
 
     <!-- Zona de perfil -->
     <div class="profile">
+      <ng-container *ngIf="authService.isLoggedIn">
+        <button
+          mat-icon-button
+          [matBadge]="cartCount"
+          matBadgeColor="accent"
+          aria-label="Carrito"
+          routerLink="/carrito"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+      </ng-container>
+
       <ng-container *ngIf="authService.isLoggedIn; else loggedOut">
         <a
           mat-stroked-button
@@ -42,11 +56,21 @@
       </ng-container>
 
       <ng-template #loggedOut>
-        <a mat-stroked-button color="accent" class="profile-link" routerLink="/login">
+        <a
+          mat-stroked-button
+          color="accent"
+          class="profile-link"
+          routerLink="/login"
+        >
           <mat-icon>account_circle</mat-icon>
           Login
         </a>
-        <a mat-stroked-button color="accent" class="logout" routerLink="/register">
+        <a
+          mat-stroked-button
+          color="accent"
+          class="logout"
+          routerLink="/register"
+        >
           <mat-icon>person_add</mat-icon>
           Registrate
         </a>
@@ -60,7 +84,10 @@
       <li (click)="goHome()">
         <a class="category-link">Inicio</a>
       </li>
-      <li *ngFor="let category of categoryList" (click)="searchCategory(category._id!)">
+      <li
+        *ngFor="let category of categoryList"
+        (click)="searchCategory(category._id!)"
+      >
         <a class="category-link">{{ category.name }}</a>
       </li>
     </ul>

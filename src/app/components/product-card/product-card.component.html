@@ -3,7 +3,8 @@
     <img
       [src]="product.images[0]"
       alt="{{ product.name }}"
-      class="product-image" />
+      class="product-image"
+    />
   </div>
 
   <div class="card-body">
@@ -30,9 +31,10 @@
       class="add-to-cart-btn"
       mat-raised-button
       color="primary"
-      (click)="addToCart($event)">
+      (click)="addToCart($event)"
+      [disabled]="product.stock === 0"
+    >
       Añadir al carrito
     </button>
-    
   </div>
 </div>

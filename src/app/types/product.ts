@@ -9,4 +9,5 @@ export interface Product{
     categoryId: string;
     isFeatured: boolean;
     isNew: boolean;
+    stock: number;
 }

@@ -9,10 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
 import { CommentService } from '../../services/comment.service';
 import { AuthService } from '../../services/auth.service'; // Debes tenerlo o simularlo
+import { CartService } from '../../services/cart.service';
 
 import { Product } from '../../types/product';
 
@@ -38,11 +40,16 @@ export class ProductDetailComponent {
   comments: any[] = [];
   message: string = '';
   rating: number = 5;
+  quantity: number = 1;
+
 
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
   commentService = inject(CommentService);
   authService = inject(AuthService); // Simulado o real
+  cartService = inject(CartService);
+  private router = inject(Router);
+
 
   isLoggedIn = false;
   currentUser: string = '';
@@ -95,4 +102,30 @@ this.currentUser = this.authService.userName;
       this.comments = this.comments.filter(c => c._id !== commentId);
     });
   }
+
+  addToCart() {
+  if (!this.authService.isLoggedIn) {
+    this.router.navigateByUrl('/login');
+    return;
+  }
+
+  if (!this.product) return;
+
+  if (this.quantity > this.product.stock) {
+    alert("No hay suficiente stock disponible");
+    return;
+  }
+
+  const userId = this.authService.userId;
+  const productId = this.product._id!;
+  const price = this.product.price;
+
+  this.cartService.addToCart(userId, productId, price, this.quantity).subscribe(() => {
+    this.cartService.updateCartCount(userId);
+    alert('Producto agregado al carrito');
+  });
+}
+
+
+
 }
