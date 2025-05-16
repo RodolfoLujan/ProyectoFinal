@@ -47,17 +47,21 @@ export class CartComponent implements OnInit {
   }
 
   removeItem(productId: string) {
-    this.cartService.removeItem(this.userId, productId).subscribe(() => {
-      this.loadCart();
-    });
-  }
+  this.cartService.removeItem(this.userId, productId).subscribe(() => {
+    this.loadCart(); 
+    this.cartService.updateCartCount(this.userId || undefined); 
+  });
+}
+
 
   clearCart() {
-    this.cartService.clearCart(this.userId).subscribe(() => {
-      this.cartItems = [];
-      this.total = 0;
-    });
-  }
+  this.cartService.clearCart(this.userId).subscribe(() => {
+    this.cartItems = [];
+    this.total = 0;
+    this.cartService.updateCartCount(this.userId || undefined);
+  });
+}
+
 
   getProductName(item: CartItem): string {
     if (typeof item.productId === 'string') return item.productId;
