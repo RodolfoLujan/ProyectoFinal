@@ -23,6 +23,13 @@
       </ng-template>
     </div>
 
+    <div class="stock" *ngIf="product.stock > 0">
+      <small> En stock: {{ product.stock }}</small>
+    </div>
+    <div class="stock" *ngIf="product.stock === 0">
+      <small style="color: red"> Sin stock</small>
+    </div>
+
     <div class="discount-badge" *ngIf="product.discount > 0">
       -{{ product.discount }}%
     </div>

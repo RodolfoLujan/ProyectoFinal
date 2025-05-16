@@ -15,6 +15,7 @@ import { AdminDashbaordComponent } from './components/manage/admin-dashbaord/adm
 import { adminGaurd } from './core/admin-guard';
 import { CustomerProfileComponent } from './components/customer-profile/customer-profile.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
     {
@@ -100,5 +101,10 @@ export const routes: Routes = [
   component: CartComponent,
   canActivate: [authGaurd]
 },
+{
+    path: 'checkout',
+    component: CheckoutComponent,
+    canActivate: [authGaurd] // opcional si quieres protegerlo
+  }
 ];
 

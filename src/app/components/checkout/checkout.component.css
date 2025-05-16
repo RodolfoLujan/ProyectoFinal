@@ -1,0 +1,11 @@
+.checkout-container {
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.checkout-summary {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

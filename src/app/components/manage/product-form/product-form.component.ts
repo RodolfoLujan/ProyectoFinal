@@ -25,6 +25,7 @@ export class ProductFormComponent {
     description:  [null, [Validators.required, Validators.minLength(50)]],
     price:  [null, [Validators.required]],
     discount: [],
+      stock: [0, [Validators.required, Validators.min(0)]], 
     images: this.formBuilder.array([]),
     categoryId: [null, [Validators.required]],
     brandId: [null, [Validators.required]],

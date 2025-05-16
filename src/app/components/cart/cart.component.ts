@@ -6,11 +6,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatCardModule,RouterLink ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

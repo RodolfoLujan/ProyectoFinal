@@ -1,1 +1,36 @@
-<p>product-list works!</p>
+<div class="product-list-container">
+  <h2 class="page-title"> Productos</h2>
+
+  <!-- Filtros activos -->
+  <div *ngIf="activeSearch || categoryName" class="filter-banner">
+    <div class="filter-text">
+      <p *ngIf="activeSearch">
+         Resultados para: <strong>{{ activeSearch }}</strong>
+      </p>
+      <p *ngIf="categoryName">
+         Categoría: <strong>{{ categoryName }}</strong>
+      </p>
+    </div>
+    <button mat-stroked-button color="warn" (click)="clearFilters()">
+      Limpiar filtros
+    </button>
+  </div>
+
+  <!-- Conteo -->
+  <p *ngIf="productList.length > 0" class="result-count">
+    {{ productList.length }} producto(s) encontrado(s)
+  </p>
+
+  <!-- Mensaje si no hay resultados -->
+  <div *ngIf="productList.length === 0" class="no-results">
+    <p>No se encontraron productos con los filtros aplicados.</p>
+  </div>
+
+  <!-- Lista de productos -->
+  <div class="product-list-grid">
+    <app-product-card
+      *ngFor="let product of productList"
+      [product]="product"
+    ></app-product-card>
+  </div>
+</div>
