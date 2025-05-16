@@ -29,4 +29,13 @@ export class ProductService {
     deleteProduct(id: string){
       return this.http.delete(environment.apiUrl + "/product/" + id);
     }
+
+    //Para aplicar filtros:
+    getFilteredProducts(search?: string | null, categoryId?: string | null) {
+  let query = '';
+  if (search) query += `search=${search}`;
+  if (categoryId) query += `${query ? '&' : ''}categoryId=${categoryId}`;
+  return this.http.get<Product[]>(`${environment.apiUrl}/product?${query}`);
+}
+
 }
