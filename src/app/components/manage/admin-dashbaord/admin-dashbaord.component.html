@@ -1,5 +1,19 @@
-<div class="flex justify-around p-10">
-    <button mat-raised-button routerLink="/admin/categorias"> Administrador de categorias</button>
-    <button mat-raised-button routerLink="/admin/productos">Administrador de productos</button>
-    <button mat-raised-button routerLink="/admin/marcas">Administrador de marcas</button>
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Panel de Administración</h1>
+  <div class="dashboard-buttons">
+    <button mat-raised-button color="primary" routerLink="/admin/categorias">
+      <mat-icon class="icon">category</mat-icon>
+      Categorías
+    </button>
+
+    <button mat-raised-button color="accent" routerLink="/admin/productos">
+      <mat-icon class="icon">inventory_2</mat-icon>
+      Productos
+    </button>
+
+    <button mat-raised-button color="warn" routerLink="/admin/marcas">
+      <mat-icon class="icon">branding_watermark</mat-icon>
+      Marcas
+    </button>
+  </div>
 </div>

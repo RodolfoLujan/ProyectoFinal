@@ -6,10 +6,11 @@ import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-login',
-  imports: [MatButtonModule, MatInputModule, ReactiveFormsModule, CommonModule],
+  imports: [MatButtonModule, MatInputModule, ReactiveFormsModule, CommonModule, FooterComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -36,8 +37,7 @@ export class LoginComponent {
     localStorage.setItem('token', result.token);
     localStorage.setItem('user', JSON.stringify(result.user));
 
-    this.cart.updateCartCount(result.user._id); // ✅ recupera el contador
-
+    this.cart.updateCartCount(result.user._id);
     this.router.navigateByUrl('/');
   },
   error: err => {
