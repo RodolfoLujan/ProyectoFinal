@@ -1,43 +1,48 @@
 .dashboard-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 40px;
+  text-align: center;
   background: linear-gradient(to right, #e3f2fd, #fce4ec);
   min-height: 100vh;
-  text-align: center;
 }
 
 .dashboard-title {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
+  font-size: 2.8rem;
+  margin-bottom: 40px;
   color: #333;
   font-weight: bold;
 }
 
-.dashboard-buttons {
+.card-grid {
   display: flex;
   gap: 30px;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-button[mat-raised-button] {
-  font-size: 1.2rem;
-  padding: 15px 25px;
+.admin-card {
+  width: 360px;
+  height: 240px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  background: linear-gradient(to right, #bac2ff, #ffffff);
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-button[mat-raised-button]:hover {
+.admin-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.icon {
-  font-size: 24px;
+.card-content h2 {
+  color: #2f2cc7;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }

@@ -10,6 +10,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './admin-dashbaord.component.html',
   styleUrl: './admin-dashbaord.component.css'
 })
-export class AdminDashbaordComponent {
-  
-}
+export class AdminDashbaordComponent {}
