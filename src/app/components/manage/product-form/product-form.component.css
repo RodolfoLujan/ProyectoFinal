@@ -1,0 +1,36 @@
+.product-form-card {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.image-section {
+  margin-top: 2rem;
+}
+
+.image-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
