@@ -1,5 +1,23 @@
-<div class="flex justify-around p-10">
-    <button mat-raised-button routerLink="/admin/categorias"> Administrador de categorias</button>
-    <button mat-raised-button routerLink="/admin/productos">Administrador de productos</button>
-    <button mat-raised-button routerLink="/admin/marcas">Administrador de marcas</button>
+<div class="dashboard-container">
+  <h1 class="dashboard-title">Panel de Administración</h1>
+
+  <div class="card-grid">
+    <a routerLink="/admin/categorias" class="admin-card">
+      <div class="card-content">
+        <h2>Categorías</h2>
+      </div>
+    </a>
+
+    <a routerLink="/admin/productos" class="admin-card">
+      <div class="card-content">
+        <h2>Productos</h2>
+      </div>
+    </a>
+
+    <a routerLink="/admin/marcas" class="admin-card">
+      <div class="card-content">
+        <h2>Marcas</h2>
+      </div>
+    </a>
+  </div>
 </div>
