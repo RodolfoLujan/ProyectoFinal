@@ -10,10 +10,14 @@ import { Brand } from '../../../types/brand';
 import { ProductService } from '../../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-product-form',
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule],
+  imports: [CommonModule,MatCardModule,ReactiveFormsModule, MatInputModule, MatButtonModule, MatSelectModule, MatCheckboxModule],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.css'
 })
@@ -39,23 +43,25 @@ export class ProductFormComponent {
   categories: Category[] = [];
   id!:string;
   route = inject(ActivatedRoute);
-  ngOnInit(){
-    this.categoryService.getCategories().subscribe((result) =>{
+  ngOnInit(): void {
+    this.categoryService.getCategories().subscribe((result) => {
       this.categories = result;
     });
-    this.brandService.getBrands().subscribe((result) =>{
+
+    this.brandService.getBrands().subscribe((result) => {
       this.brands = result;
     });
-    this.id = this.route.snapshot.params["id"];
-    console.log(this.id);
-    if(this.id){
-        this.productService.getProductById(this.id).subscribe(result =>{
-          for(let index = 0; index < result.images.length; index++){
-            this.addImage();
-          }
-          this.productForm.patchValue(result as any);
-        });
-    }else{
+
+    this.id = this.route.snapshot.params['id'];
+
+    if (this.id) {
+      this.productService.getProductById(this.id).subscribe(result => {
+        for (let i = 0; i < result.images.length; i++) {
+          this.addImage();
+        }
+        this.productForm.patchValue(result as any);
+      });
+    } else {
       this.addImage();
     }
   }
